@@ -1,3 +1,5 @@
+// Created by erinc at 11.02.20
+
 package algorithm.GaleShapleyAlgorithm;
 
 import java.util.LinkedList;

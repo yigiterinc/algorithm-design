@@ -1,3 +1,5 @@
+// Created by erinc at 11.02.20
+
 package algorithm.GaleShapleyAlgorithm;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class Main {
         women.add(gulbike);
         women.add(ece);
 
-        GaleShapleyAlgorithm galeShapleyAlgorithm = new GaleShapleyAlgorithm(men, women);
+        GaleShapleyAlgorithm galeShapleyAlgorithm = new GaleShapleyAlgorithm(men);
         galeShapleyAlgorithm.run();
 
         for (Woman woman : women) {
