@@ -21,7 +21,8 @@ public class Man extends Person {
         return preferredSpouses.getFirst();
     }
 
-    void proceedPreferenceList() {  // After the man proposed to a woman, he cannot propose to her again
+    // After the man proposed to a woman, he cannot propose to her again
+    void proceedPreferenceList() {
         preferredSpouses.removeFirst();
     }
 

@@ -10,24 +10,24 @@ public class Main {
 
     public static void main(String[] args) {
         Man yigit = new Man("Yigit");
-        Man ahmet = new Man("Ahmet");
+        Man cemal = new Man("Cemal");
+        Man batuhan = new Man("Batuhan");
+
+        Woman ayse = new Woman("Ayse",
+                new ArrayList<>(Arrays.asList(yigit, cemal, batuhan)));
 
         Woman gulbike = new Woman("Gulbike",
-                        new ArrayList<>(Arrays.asList(yigit, ahmet)));
+                new ArrayList<>(Arrays.asList(cemal, yigit, batuhan)));
 
-        Woman ece = new Woman("Ece",
-                    new ArrayList<>(Arrays.asList(yigit, ahmet)));
+        Woman canan = new Woman("Canan",
+                new ArrayList<>(Arrays.asList(cemal, yigit, batuhan)));
 
-        yigit.setPreferredSpouses(new LinkedList<>(Arrays.asList(gulbike, ece)));
-        ahmet.setPreferredSpouses(new LinkedList<>(Arrays.asList(gulbike, ece)));
+        cemal.setPreferredSpouses(new LinkedList<>(Arrays.asList(ayse, gulbike, canan)));
+        yigit.setPreferredSpouses(new LinkedList<>(Arrays.asList(gulbike, ayse, canan)));
+        batuhan.setPreferredSpouses(new LinkedList<>(Arrays.asList(ayse, gulbike, canan)));
 
-        ArrayList<Man> men = new ArrayList<>();
-        men.add(yigit);
-        men.add(ahmet);
-
-        ArrayList<Woman> women = new ArrayList<>();
-        women.add(gulbike);
-        women.add(ece);
+        ArrayList<Man> men = new ArrayList<>(Arrays.asList(cemal, yigit, batuhan));
+        ArrayList<Woman> women = new ArrayList<>(Arrays.asList(gulbike, ayse, canan));
 
         GaleShapleyAlgorithm galeShapleyAlgorithm = new GaleShapleyAlgorithm(men);
         galeShapleyAlgorithm.run();
