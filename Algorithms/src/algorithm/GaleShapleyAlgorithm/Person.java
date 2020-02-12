@@ -1,6 +1,6 @@
 package algorithm.GaleShapleyAlgorithm;
 
-public class Person {
+public abstract class Person {
     private String name;
 
     public Person(String name) {

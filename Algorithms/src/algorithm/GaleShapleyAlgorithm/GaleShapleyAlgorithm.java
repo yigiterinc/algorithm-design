@@ -6,11 +6,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class GaleShapleyAlgorithm {
     private static Queue<Man> freeMen = new LinkedBlockingQueue<>();
-    private static ArrayList<Woman> women;
 
-    public GaleShapleyAlgorithm(ArrayList<Man> men, ArrayList<Woman> women) {
+    public GaleShapleyAlgorithm(ArrayList<Man> men) {
         GaleShapleyAlgorithm.freeMen.addAll(men);
-        GaleShapleyAlgorithm.women = women;
     }
 
     public void run() {

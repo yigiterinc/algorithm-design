@@ -1,20 +1,22 @@
 package algorithm.GaleShapleyAlgorithm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Woman extends Person {
-    private ArrayList<Man> preferredSpouses;
+    // Maps each man to their preference score, HashMap guarantees O(1) lookup time
+    private HashMap<Man, Integer> spouseToPreferenceScore;
     private Man husband;
 
     public Woman(String name) {
         super(name);
-        preferredSpouses = new ArrayList<>();
+        spouseToPreferenceScore = new HashMap<>();
         this.husband = null;
     }
 
     public Woman(String name, ArrayList<Man> preferredSpouses) {
-        super(name);
-        setPreferredSpouses(preferredSpouses);
+        this(name);
+        setSpouseToPreferenceScore(preferredSpouses);
     }
 
     boolean isFree() {
@@ -30,18 +32,16 @@ public class Woman extends Person {
     }
 
     boolean doesPreferToCurrentHusband(Man guy) {
-        for (Man man : preferredSpouses) {
-            if (man.equals(husband)) {
-                return false;
-            } else if (man.equals(guy)) {
-                return true;
-            }
-        }
-
-        return false;
+        return spouseToPreferenceScore.get(guy) > spouseToPreferenceScore.get(husband);
     }
 
-    public void setPreferredSpouses(ArrayList<Man> preferredSpouses) {
-        this.preferredSpouses = preferredSpouses;
+    public void setSpouseToPreferenceScore(ArrayList<Man> preferredSpouses) {
+        this.spouseToPreferenceScore = new HashMap<>();
+        int numberOfMen = preferredSpouses.size();
+
+        for (int i = 0; i < numberOfMen; i++) {
+            Man man = preferredSpouses.get(i);
+            this.spouseToPreferenceScore.put(man, numberOfMen - i);    // Lower indices have higher preference
+        }
     }
 }
