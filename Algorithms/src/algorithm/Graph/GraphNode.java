@@ -1,9 +1,9 @@
 package algorithm.Graph;
 
-public class Node {
-    int id;
+public abstract class GraphNode {
+    private int id;
 
-    public Node(int id) {
+    public GraphNode(int id) {
         this.id = id;
     }
 
