@@ -92,11 +92,68 @@ public class WeightedGraph extends Graph {
         System.out.print("Path: ");
         for (int id : path)
             System.out.print(id + " ");
+
+        System.out.println();
+    }
+
+    public List<Edge> prim(int startIndex) {
+        int edgeCountInMST = this.nodeLookup.size() - 1;    // We need (m - 1) edges to connect m nodes
+        int pickedEdgesCount = 0;
+        ArrayList<Edge> mstEdges = new ArrayList<>();
+
+        Node startNode = (Node) this.nodeLookup.get(startIndex);
+        ArrayList<Integer> visited = new ArrayList<>();
+        PriorityQueue<Edge> queue = new PriorityQueue<>();
+
+        addOutgoingEdges(startNode, queue, visited);
+
+        while (!queue.isEmpty() && pickedEdgesCount != edgeCountInMST) {
+            Edge edge = queue.poll();
+            int nodeIndex = edge.to.getId();
+
+            // Coktan visit edildiyse bak dalgana...
+            if (visited.contains(nodeIndex))
+                continue;
+
+            mstEdges.add(edge);
+            pickedEdgesCount++;
+
+            addOutgoingEdges((Node) this.nodeLookup.get(nodeIndex), queue, visited);
+        }
+
+        if (pickedEdgesCount != edgeCountInMST)
+            throw new RuntimeException("MST does not exist!");
+
+        printMST(mstEdges);
+
+        return mstEdges;
+    }
+
+    private void addOutgoingEdges(Node startNode, PriorityQueue<Edge> queue, ArrayList<Integer> visited) {
+        for (Node adjacent : startNode.getAdjacent()) {
+            if (!visited.contains(adjacent.getId())) {
+                String correspondingEdgeId = Integer.toString(startNode.getId()) + adjacent.getId();
+                Edge edge = this.edgeLookup.get(correspondingEdgeId);  // O(1) operation
+                queue.add(edge);
+            }
+        }
+
+        visited.add(startNode.getId());
+    }
+
+    private void printMST(List<Edge> edges) {
+        int totalWeight = 0;
+        for (Edge edge : edges) {
+            System.out.println(edge);
+            totalWeight += edge.weight;
+        }
+
+        System.out.println("Total weight of MST is : " + totalWeight);
     }
 
     // Return the weight of edge between nodes from and to
     int getWeight(Node from, Node to) {
-        return this.edgeLookup.get(Integer.toString(from.getId() + to.getId())).weight;
+        return this.edgeLookup.get(Integer.toString(from.getId()) + to.getId()).weight;
     }
 
     // Used in Dijkstra for Priority Queue

@@ -1,6 +1,6 @@
 package algorithm.Graph.WeightedGraph;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     Node from;
     Node to;
     int weight;
@@ -11,7 +11,7 @@ public class Edge {
         this.to = to;
         this.weight = weight;
 
-        this.id = Integer.toString(this.from.getId() + this.to.getId());
+        this.id = Integer.toString(this.from.getId()) + this.to.getId();
     }
 
     @Override
@@ -21,5 +21,15 @@ public class Edge {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public int compareTo(Edge o) {
+        return Integer.compare(this.weight, o.weight);
+    }
+
+    @Override
+    public String toString() {
+        return this.from.getId() + " " + this.to.getId();
     }
 }

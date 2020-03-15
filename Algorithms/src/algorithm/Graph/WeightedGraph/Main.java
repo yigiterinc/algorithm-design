@@ -33,5 +33,6 @@ public class Main {
         graph.addEdge(5, 6, 5);
 
         graph.dijkstra(1, 6);
+        graph.prim(1);
     }
 }
